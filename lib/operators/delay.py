@@ -10,7 +10,7 @@ def delay(dt):
 
             async def schedule_future():
                 await asyncio.sleep(dt)
-                await super(S, self).queue_value(value)
+                await ProxySubject.queue_value(self, value)
 
             asyncio.ensure_future(schedule_future())
 

@@ -1,5 +1,6 @@
 import asyncio
-from lib.action import Action
+
+from lib.event import Event
 from lib.observable import Observable
 from lib.observer import Observer
 
@@ -10,30 +11,28 @@ class Subject(Observer, Observable):
 
 class ProxySubject(Subject):
     def __init__(self):
-        self.queue: asyncio.Queue[Action] = asyncio.Queue()
+        self.queue: asyncio.Queue = asyncio.Queue()
+        self.completed = False
 
     async def queue_value(self, value):
         """
         Connection between `on_subscribe` and `on_next` methods
         """
-        if not isinstance(value, Action):
-            value = Action(value)
-
         await self.queue.put(value)
 
     async def on_next(self, value):
-        await self.queue_value(value)
+        await self.queue_value(Event(value))
 
     async def on_completed(self):
-        await self.queue.put(Action.completed())
+        await self.queue_value(Event.completed())
 
     async def on_subscribe(self, observer):
         while True:
-            action = await self.queue.get()
+            event = await self.queue.get()
 
-            if action is Action.completed():
+            if event is Event.completed():
                 break
 
-            await observer.on_next(action.value)
+            await observer.on_next(event.value)
 
         await observer.on_completed()
