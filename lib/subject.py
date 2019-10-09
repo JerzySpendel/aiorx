@@ -26,7 +26,7 @@ class ProxySubject(Subject):
     async def on_completed(self):
         await self.proxy(Event.completed())
 
-    async def on_subscribe(self, observer):
+    async def on_subscribe(self, observer: Observer):
         while True:
             event = await self.queue.get()
 

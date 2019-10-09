@@ -15,10 +15,10 @@ class Observable(base.Observable, ObservableTools):
         pass
 
     def subscribe(self, observer) -> Disposable:
-        if isinstance(observer, types.FunctionType) or isinstance(observer, types.BuiltinFunctionType):
+        if isinstance(observer, types.FunctionType) or isinstance(
+            observer, types.BuiltinFunctionType
+        ):
             observer = Observer.from_function(observer)
 
         task = asyncio.ensure_future(self.on_subscribe(observer))
         return Disposable(callback=task.cancel)
-
-

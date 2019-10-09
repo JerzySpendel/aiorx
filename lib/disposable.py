@@ -7,4 +7,4 @@ class Disposable:
 
     @classmethod
     def dummy(cls):
-        return cls(callback=lambda: print('disposed'))
+        return cls(callback=lambda: print("disposed"))

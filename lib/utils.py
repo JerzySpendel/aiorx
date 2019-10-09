@@ -26,8 +26,8 @@ class ObservableTools:
         from lib.observable import Observable
 
         assert isinstance(gen, types.AsyncGeneratorType)
-        class O(Observable):
 
+        class O(Observable):
             async def on_subscribe(self, observer):
                 async for value in gen:
                     await observer.on_next(value)

@@ -6,7 +6,6 @@ from lib.subject import ProxySubject
 
 
 def throttle_time(dt):
-
     class S(ProxySubject):
         def __init__(self):
             super().__init__()

@@ -10,7 +10,6 @@ class Observer:
 
     @staticmethod
     def from_function(f):
-
         class O(Observer):
             async def on_next(self, value):
                 f(value)
