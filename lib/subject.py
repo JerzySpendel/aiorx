@@ -14,17 +14,17 @@ class ProxySubject(Subject):
         self.queue: asyncio.Queue = asyncio.Queue()
         self.completed = False
 
-    async def queue_value(self, value):
+    async def proxy(self, value):
         """
         Connection between `on_subscribe` and `on_next` methods
         """
         await self.queue.put(value)
 
     async def on_next(self, value):
-        await self.queue_value(Event(value))
+        await self.proxy(Event(value))
 
     async def on_completed(self):
-        await self.queue_value(Event.completed())
+        await self.proxy(Event.completed())
 
     async def on_subscribe(self, observer):
         while True:

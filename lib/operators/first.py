@@ -5,6 +5,6 @@ def first():
 
     class S(Subject.proxy()):
         async def queue_value(self, value):
-            await super().queue_value(value)
+            await super().proxy(value)
 
     return S()

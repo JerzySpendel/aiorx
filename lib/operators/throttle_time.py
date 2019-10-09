@@ -18,10 +18,10 @@ def throttle_time(dt):
             self.task = None
             self.accepting_values = True
 
-        async def queue_value(self, value):
+        async def proxy(self, value):
             if self.accepting_values:
                 self.accepting_values = False
-                return await super().queue_value(value)
+                return await super().proxy(value)
 
             if not self.task:
                 self.task = asyncio.ensure_future(self.start_accepting())

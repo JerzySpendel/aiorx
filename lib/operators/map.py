@@ -4,7 +4,7 @@ from lib.subject import ProxySubject
 def map(f):
 
     class MapOperator(ProxySubject):
-        async def queue_value(self, value):
-            return await super().queue_value(f(value))
+        async def proxy(self, value):
+            return await super().proxy(f(value))
 
     return MapOperator()
