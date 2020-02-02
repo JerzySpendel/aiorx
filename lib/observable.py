@@ -21,9 +21,11 @@ class Observable(base.Observable, ObservableTools):
         """
         pass
 
-    def subscribe(self, observer) -> Disposable:
+    def subscribe(self, observer, loop=None) -> Disposable:
+        loop = loop or asyncio.get_event_loop()
+
         if isinstance(observer, (types.FunctionType, types.BuiltinFunctionType)):
             observer = Observer.from_function(observer)
 
-        task = asyncio.ensure_future(self.on_subscribe(observer))
+        task = asyncio.ensure_future(self.on_subscribe(observer), loop=loop)
         return Disposable(callback=task.cancel)
