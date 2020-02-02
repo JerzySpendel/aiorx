@@ -1,6 +1,6 @@
-import typing
+from lib.observable import Observable
+from lib.observer import Observer
 
-from lib.base import Observer, Observable
 from lib.subject import ProxySubject
 
 

@@ -10,6 +10,8 @@ class Subject(Observer, Observable):
 
 
 class ProxySubject(Subject):
+    """
+    """
     def __init__(self):
         self.queue: asyncio.Queue = asyncio.Queue()
         self.completed = False

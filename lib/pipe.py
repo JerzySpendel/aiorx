@@ -1,4 +1,3 @@
-from lib.observable import Observable
 from lib.subject import Subject, ProxySubject
 from lib.observer import Observer
 

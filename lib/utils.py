@@ -21,6 +21,9 @@ class ObservableTools:
 
         return piped
 
+    def __getattr__(self, attr):
+        pass
+
     @staticmethod
     def from_async_gen(gen):
         from lib.observable import Observable

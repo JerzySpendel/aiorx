@@ -8,9 +8,9 @@ class Observer:
     async def on_completed(self):
         pass
 
-    @staticmethod
-    def from_function(f):
-        class O(Observer):
+    @classmethod
+    def from_function(cls, f):
+        class O(cls):
             async def on_next(self, value):
                 f(value)
 
