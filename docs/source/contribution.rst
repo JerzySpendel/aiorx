@@ -1,5 +1,5 @@
 New operators
-==============================
+=============
 
 In this stage of development of aiorx help is seen welcome mostly in building new operators :)
 

@@ -18,3 +18,10 @@ class Observer:
                 pass
 
         return O()
+
+    @classmethod
+    def from_async(cls, coro_function):
+        class O(cls):
+            on_next = staticmethod(coro_function)
+
+        return O()

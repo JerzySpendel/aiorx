@@ -9,6 +9,7 @@ Welcome to aiorx's documentation!
 .. toctree::
    about.rst
    obervable.rst
+   contribution.rst
    :maxdepth: 2
    :caption: Contents:
 

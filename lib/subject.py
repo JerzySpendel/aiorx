@@ -11,8 +11,11 @@ class Subject(Observer, Observable):
 
 class ProxySubject(Subject):
     """
+    Basic helper class, used mostly for building operators
     """
+
     def __init__(self):
+        super().__init__()
         self.queue: asyncio.Queue = asyncio.Queue()
         self.completed = False
 
@@ -29,6 +32,13 @@ class ProxySubject(Subject):
         await self.proxy(Event.completed())
 
     async def on_subscribe(self, observer: Observer):
+        """
+        The flow is the following:
+
+
+        :param observer:
+        :return:
+        """
         while True:
             event = await self.queue.get()
 
