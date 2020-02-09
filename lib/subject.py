@@ -22,6 +22,9 @@ class ProxySubject(Subject):
     async def proxy(self, value):
         """
         Connection between `on_subscribe` and `on_next` methods
+
+        Every values that's passed to the ProxySubject through .proxy()
+        will be used in .subscribe() (passed to registered observers) as soon as possible
         """
         await self.queue.put(value)
 
