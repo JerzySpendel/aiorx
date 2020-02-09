@@ -4,17 +4,16 @@ import types
 from lib.disposable import Disposable
 from lib.observer import Observer
 from lib.utils import ObservableTools
-from lib import base
 
 
-class Observable(base.Observable, ObservableTools):
+class Observable(ObservableTools):
     """
-    Every class has to derive from this.
+    Every observable has to derive from this.
     """
     def __init__(self, on_subscribe=None):
         self.on_subscribe = on_subscribe or self.on_subscribe
 
-    async def on_subscribe(self, observer: base.Observer):
+    async def on_subscribe(self, observer: Observer):
         """
         :param observer:
         :return:
@@ -28,4 +27,4 @@ class Observable(base.Observable, ObservableTools):
             observer = Observer.from_function(observer)
 
         task = asyncio.ensure_future(self.on_subscribe(observer), loop=loop)
-        return Disposable(callback=task.cancel)
+        return Disposable(callback=task.cancel, await_on=task)
