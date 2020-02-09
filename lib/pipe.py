@@ -7,8 +7,8 @@ def pipe(source: Subject, output: Subject) -> Subject:
         async def on_next(self, value):
             await source.on_next(value)
 
-        def subscribe(self, observer: Observer):
-            source.subscribe(output)
-            output.subscribe(observer)
+        def subscribe(self, observer: Observer, loop=None):
+            output.subscribe(observer, loop)
+            return source.subscribe(output, loop)
 
     return S()
